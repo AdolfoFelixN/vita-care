@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
   try {
-    const result = await conn.query("SELECT * FROM usuarios WHERE ID = ?", [
+    const result = await conn.query("SELECT * FROM pacientes WHERE ID = ?", [
       params.id,
     ]);
     if (result.length <= 0) {
       return NextResponse.json(
         {
-          message: "No se encontró el usuario",
+          message: "No se encontró el paciente",
         },
         {
           status: 404,
@@ -29,30 +29,27 @@ export async function GET(req, { params }) {
   }
 }
 
-export async function PUT(request, { params }) {
+export async function PUT(req, { params }) {
   try {
-    const data = await request.json();
-    const result = await conn.query("UPDATE usuarios SET ? WHERE ID = ?", [
+    const data = await req.json();
+    const result = await conn.query("UPDATE pacientes SET ? WHERE ID = ?", [
       data,
       params.id,
     ]);
-    console.log(result);
-
     if (result.affectedRows === 0) {
       return NextResponse.json(
         {
-          message: "Usuario no encontrado",
+          message: "Paciente no encontrado",
         },
         {
           status: 404,
         }
       );
     }
-
-    const updatedUser = await conn.query("SELECT * FROM usuarios WHERE ID = ?", [
+    const updatedPatient = await conn.query("SELECT * FROM pacientes WHERE ID = ?", [
       params.id,
     ]);
-    return NextResponse.json(updatedUser[0]);
+    return NextResponse.json(updatedPatient[0]);
   } catch (error) {
     return NextResponse.json(
       {
@@ -67,14 +64,13 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const result = await conn.query("DELETE FROM usuarios WHERE ID = ?", [
+    const result = await conn.query("DELETE FROM pacientes WHERE ID = ?", [
       params.id,
     ]);
-
     if (result.affectedRows === 0) {
       return NextResponse.json(
         {
-          message: "Usuario no encontrado",
+          message: "Paciente no encontrado",
         },
         {
           status: 404,

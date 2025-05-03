@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req, res) {
   const result = await conn.query("SELECT * FROM usuarios");
-  if (result.length < 0) {
+  if (result.length <= 0) {
     return NextResponse.json({ message: "No hay usuario registrados" });
   }
   return NextResponse.json(result);
