@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req, res) {
   try {
     const result = await conn.query("SELECT * FROM pacientes");
-    if (result.length <= 0) {
+    if (result.length === 0) {
       return NextResponse.json(
         {
           message: "No se encontraron pacientes",
