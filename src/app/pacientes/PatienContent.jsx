@@ -10,11 +10,18 @@ function PatienContent() {
 
   useEffect(() => {
     const getPatients = async () => {
-      const { data } = await axios.get("/api/pacientes");
-      setPacientes(data);
+      try {
+        const { data } = await axios.get("/api/pacientes");
+        setPacientes(data);
+      } catch (error) {
+        console.error(error);
+        setPacientes([]); // Opcional: aseguras que pacientes quede vacío si falla
+      }
     };
+    
     getPatients();
   }, []);
+  
 
   console.log(pacientes);
 
@@ -43,7 +50,11 @@ function PatienContent() {
         </button>
       </div>
       <div>
-        <Table columns={columns} data={pacientes} />
+        {pacientes.length>0 ? (
+            <Table columns={columns} data={pacientes} />
+        ): (
+            <span className="text-lg text-red-400 font-semibold">No hay pacientes registrados</span>
+        )}
       </div>
     </>
   );
