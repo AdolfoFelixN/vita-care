@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-svh`}
       >
-        <main className="grid grid-cols-[10%_90%]">
+        <main className="grid grid-cols-[12%_88%]">
           <div className="">
             <SideBar />
           </div>
