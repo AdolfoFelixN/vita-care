@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { GrDocumentText } from "react-icons/gr";
 function SideBar() {
   return (
-    <div className="bg-white h-svh border border-r-gray-200">
+    <div className="bg-white h-svh border-r-1 border-r-gray-200">
         <div className="flex items-center justify-between py-3 px-2">
         <h1 className="text-blue-400 font-bold text-xl">Vita Care</h1>
         <MdMenu className="text-xl font-bold cursor-pointer"/>
