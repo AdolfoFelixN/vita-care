@@ -1,6 +1,23 @@
-import React from 'react'
+"use client"
+
+import PatientCard from "@/components/PatientCard"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
 function CitasPage() {
+
+    const [citas, setCitas] = useState([])
+
+    useEffect(() => {
+        const getCitas = async () => {
+            const {data} = await axios.get('/api/citas')
+            setCitas(data)
+        }
+        getCitas()
+    }, [])
+
+    console.log(citas)
+
   return (
    <>
       <h1 className="text-3xl font-bold">Agenda de Consultas</h1>
@@ -24,6 +41,11 @@ function CitasPage() {
             </div>
             <button type='submit' className='bg-blue-500 mt-2 text-white rounded px-3 py-2 cursor-pointer hover:bg-blue-600'>Nueva cita</button>
         </form>
+        <div className="px-5 grid grid-cols-2 gap-5">
+            {citas.map((cita) => (
+                <PatientCard key={cita.ID} cita={cita}/>
+            ))}
+        </div>
       </div>
     </>
   )
