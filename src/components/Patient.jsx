@@ -5,7 +5,7 @@ function Patient({cita, paciente, medico}) {
     <>
       <div className="flex justify-between">
         <p className="text-lg font-semibold">{paciente.Nombre}</p>
-        <span className="rounded-full bg-red-200 text-red-600 p-2 text-xs items-center justify-center">
+        <span className={`rounded-full py-1 px-2 text-[10px] flex items-center justify-center ${cita.Estado==="Cancelada" ? 'bg-red-200 text-red-600' : 'bg-green-300 text-green-700' }`}>
           {cita.Estado}
         </span>
       </div>
