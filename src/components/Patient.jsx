@@ -1,6 +1,4 @@
-
 function Patient({cita, paciente, medico}) {
-
   return (
     <>
       <div className="flex justify-between">

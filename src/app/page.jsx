@@ -1,5 +1,4 @@
 import CardDashboard from "@/components/CardDashboard";
-import Image from "next/image";
 
 export default function Home() {
   return (
