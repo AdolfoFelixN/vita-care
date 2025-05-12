@@ -1,29 +1,34 @@
+"use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Patient from "./Patient";
 
-function PatientCard({cita}) {
+function PatientCard({ cita }) {
+  const [patients, setPatients] = useState([]);
+  const [medicos, setMedicos] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const pacientesRes = await axios.get("/api/pacientes");
+      const medicosRes = await axios.get("/api/usuarios");
+      setPatients(pacientesRes.data);
+      setMedicos(medicosRes.data);
+    };
+    getData();
+  }, []);
+
+  const paciente = patients.find((p) => p.ID === cita.Paciente_ID);
+  const medico = medicos.find(m => m.ID === cita.Medico_ID);
+
   return (
     <form key={cita.ID} className="bg-white rounded p-3 shadow-md mt-2">
-      <div className="flex justify-between">
-        <p className="text-lg font-semibold">Roberto Martinez</p>
-        <span className="rounded-full bg-red-200 text-red-600 p-2 text-xs items-center justify-center">
-          {cita.Estado}
-        </span>
-      </div>
-      <div className="text-gray-400 text-sm flex flex-col gap-1">
-        <p>Dr. Sofia Torres</p>
-        <p>{cita.FechaHora}</p>
-        <p>14:30</p>
-        <p>
-          Motivo: <span>{cita.Motivo}</span>
-        </p>
-      </div>
-      <div className="flex justify-between mt-3">
-        <button className="rounded border border-gray-300 bg-white px-2 py-1 hover:bg-gray-100 cursor-pointer">
-          Reprogramar
-        </button>
-        <button className="rounded bg-blue-500 text-white px-2 py-1 hover:bg-blue-600 cursor-pointer">
-          Ver Detalles
-        </button>
-      </div>
+      {patients.map((patient) => (
+        <div key={patient.ID}>
+          {paciente && medico && (
+            <Patient cita={cita} paciente={paciente} medico={medico} />
+          )}
+        </div>
+      ))}
     </form>
   );
 }
