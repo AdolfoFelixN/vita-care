@@ -1,9 +1,18 @@
-function Patient({cita, paciente, medico}) {
+import { useRouter } from "next/navigation";
+
+function Patient({ cita, paciente, medico }) {
+    const router = useRouter()
   return (
     <>
       <div className="flex justify-between">
         <p className="text-lg font-semibold">{paciente.Nombre}</p>
-        <span className={`rounded-full py-1 px-2 text-[10px] flex items-center justify-center ${cita.Estado==="Cancelada" ? 'bg-red-200 text-red-600' : 'bg-green-300 text-green-700' }`}>
+        <span
+          className={`rounded-full py-1 px-2 text-[10px] flex items-center justify-center ${
+            cita.Estado === "Cancelada"
+              ? "bg-red-200 text-red-600"
+              : "bg-green-300 text-green-700"
+          }`}
+        >
           {cita.Estado}
         </span>
       </div>
@@ -16,10 +25,17 @@ function Patient({cita, paciente, medico}) {
         </p>
       </div>
       <div className="flex justify-between mt-3">
-        <button className="rounded border border-gray-300 bg-white px-2 py-1 hover:bg-gray-100 cursor-pointer">
+        <button
+          type="button"
+          className="rounded border border-gray-300 bg-white px-2 py-1 hover:bg-gray-100 cursor-pointer"
+        >
           Reprogramar
         </button>
-        <button className="rounded bg-blue-500 text-white px-2 py-1 hover:bg-blue-600 cursor-pointer">
+        <button
+          type="submit"
+          onClick={() => router.push(`/citas/cita/${cita.ID}`)}
+          className="rounded bg-blue-500 text-white px-2 py-1 hover:bg-blue-600 cursor-pointer"
+        >
           Ver Detalles
         </button>
       </div>

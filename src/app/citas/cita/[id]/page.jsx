@@ -1,8 +1,12 @@
+"use client"
+import { useParams } from "next/navigation";
 
 function DetallesCita() {
+  const params = useParams();
   return (
     <>
       <h1 className="text-3xl font-bold">Detalles de Cita</h1>
+      <p>Cita {params.id}</p>
       {/* <div className='grid grid-cols-[25%_75%] mt-8'>
         <form className='p-4 shadow-md rounded bg-white flex flex-col gap-2 h-[40%]'>
             <h2 className='font-semibold text-lg'>Filtros</h2>
