@@ -7,13 +7,16 @@ import { useEffect, useState } from "react"
 function CitasPage() {
 
     const [citas, setCitas] = useState([])
+    const [medicos, setMedicos] = useState([])
 
     useEffect(() => {
-        const getCitas = async () => {
-            const {data} = await axios.get('/api/citas')
-            setCitas(data)
+        const getData = async () => {
+            const citasRes = await axios.get('/api/citas')
+            setCitas(citasRes.data)
+            const medicosRes = await axios.get('/api/usuarios')
+            setMedicos(medicosRes.data)
         }
-        getCitas()
+        getData()
     }, [])
 
     console.log(citas)
@@ -37,6 +40,9 @@ function CitasPage() {
                 <select name="" id="" className='rounded border border-gray-400 text-gray-500 p-2'>
                     <option value="">Todos los doctores</option>
                     <option value="">Doctor 1</option>
+                    {medicos.map((medico)=> (
+                        <option key={medico.ID} value={medico.ID}>{medico.Nombre}</option>
+                    ))}
                 </select>
             </div>
             <button type='submit' className='bg-blue-500 mt-2 text-white rounded px-3 py-2 cursor-pointer hover:bg-blue-600'>Nueva cita</button>
