@@ -6,7 +6,6 @@ import Patient from "./Patient";
 function PatientCard({ cita }) {
   const [patients, setPatients] = useState([]);
   const [medicos, setMedicos] = useState([]);
-  const router = useRouter();
 
   useEffect(() => {
     const getData = async () => {

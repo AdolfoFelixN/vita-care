@@ -24,7 +24,7 @@ function CitasPage() {
   console.log(citas);
 
   return (
-    <>
+    <main className="h-svh border border-black">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Agenda de Consultas</h1>
         <button
@@ -32,7 +32,7 @@ function CitasPage() {
           className="flex items-center gap-2 bg-blue-500 mt-2 text-white rounded px-3 py-2 cursor-pointer hover:bg-blue-600"
         >
           Nueva cita
-          <IoMdAdd fontSize={20}/>
+          <IoMdAdd fontSize={20} />
         </button>
       </div>
       <div className="grid grid-cols-[25%_75%] mt-8">
@@ -77,13 +77,13 @@ function CitasPage() {
             </select>
           </div>
         </form>
-        <div className="px-5 grid grid-cols-2 gap-5 h-[85%] overflow-y-auto">
+        <div className="px-5 grid grid-cols-2 gap-5 h-[85vh] overflow-y-auto">
           {citas.map((cita) => (
             <PatientCard key={cita.ID} cita={cita} />
           ))}
         </div>
       </div>
-    </>
+    </main>
   );
 }
 
